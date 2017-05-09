@@ -9,7 +9,7 @@ class Login extends Component {
         super();
         this.state = {
             redirect: false,
-            error:''
+            error: ''
         };
 
 
@@ -31,16 +31,17 @@ class Login extends Component {
         let password = this.refs.password.value.trim();
         Meteor.loginWithPassword({email}, password, (err) => {
 
-            if(err) {
+            if (err) {
 
                 this.setState({
                     error: err.reason
-                })
+                });
 
-            } else{
+            } else {
                 this.setState({
                     error: ''
-                })
+                });
+
                 this.props.history.replace('/links');
             }
 
@@ -56,20 +57,21 @@ class Login extends Component {
         } else {
             return (
 
-                <div >
-                    <h1>Short Link</h1>
+                <div className="boxed-view ">
+                    <div className="boxed-view__box">
+                        <h1>Short Link</h1>
 
-                    {this.state.error ? <p>{this.state.error}</p> : undefined }
+                        {this.state.error ? <p>{this.state.error}</p> : undefined }
 
-                    <form onSubmit={this.onSubmit.bind(this)} noValidate>
-                        <input type="email" name="email" placeholder="Email" ref="email"/>
-                        <input type="password" name="password" placeholder="Password" ref="password"/>
-                        <button >Login</button>
-                    </form>
+                        <form onSubmit={this.onSubmit.bind(this)} noValidate className="boxed-view__form">
+                            <input type="email" name="email" placeholder="Email" ref="email"/>
+                            <input type="password" name="password" placeholder="Password" ref="password"/>
+                            <button className="button">Login</button>
+                        </form>
 
-                    <Link to="/signup"> Have an account? </Link>
+                        <Link to="/signup"> Have an account? </Link>
+                    </div>
                 </div>
-
             );
         }
 

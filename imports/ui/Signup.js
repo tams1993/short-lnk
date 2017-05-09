@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {Link,Redirect} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {Accounts} from 'meteor/accounts-base';
-
 
 
 class Signup extends Component {
@@ -29,16 +28,16 @@ class Signup extends Component {
         let email = this.refs.email.value.trim();
         let password = this.refs.password.value.trim();
 
-        if(password.length < 9) {
+        if (password.length < 9) {
             return this.setState({error: 'Password must be more than 9 characters long'});
         }
 
         Accounts.createUser({
             email,
             password
-        }, (error)=> {
+        }, (error) => {
 
-            if(error) {
+            if (error) {
 
                 this.setState({
                     error: error.reason
@@ -64,18 +63,20 @@ class Signup extends Component {
     render() {
         return (
 
-            <div>
-                <h1>Join Short Link</h1>
+            <div className="boxed-view">
+                <div className="boxed-view__box">
+                    <h1>Join Short Link</h1>
 
-                {this.state.error ? <p>{this.state.error}</p> : undefined }
+                    {this.state.error ? <p>{this.state.error}</p> : undefined }
 
-                <form onSubmit={this.onSubmit.bind(this)} noValidate>
-                    <input type="email" name="email" placeholder="Email" ref="email"/>
-                    <input type="password" name="password" placeholder="Password" ref="password"/>
-                    <button >Create Account</button>
-                </form>
+                    <form onSubmit={this.onSubmit.bind(this)} noValidate className="boxed-view__form">
+                        <input type="email" name="email" placeholder="Email" ref="email"/>
+                        <input type="password" name="password" placeholder="Password" ref="password"/>
+                        <button className="button">Create Account</button>
+                    </form>
 
-                <Link to="/">Already have an account? </Link>
+                    <Link to="/">Already have an account? </Link>
+                </div>
             </div>
         );
 

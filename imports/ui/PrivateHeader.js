@@ -1,28 +1,36 @@
 import React, {Component, PropTypes} from 'react';
+import {Accounts} from 'meteor/accounts-base';
 
-export default class PrivateHeader extends Component {
+
+const PrivateHeader = (props) => {
 
 
-    onLogout() {
+    return (
 
-        Accounts.logout(() => {
-            this.props.history.push('/');
-        });
 
-    }
+        <div className="header">
+            <div className="header__content">
+                <h1 className="header__title">{props.title}</h1>
+                <button className="button button--link-text" onClick={() => {
 
-    render() {
+                    Accounts.logout(() => {
+                        props.history.push('/');
+                    })
 
-        return (
-            <div>
-                <p>{this.props.title}</p>
-                <button onClick={this.onLogout.bind(this)}>Logout</button>
+                }}>Logout
+                </button>
             </div>
-        );
-    }
+        </div>
+
+
+    );
+
+
 }
 
 PrivateHeader.propTypes = {
     title: PropTypes.string.isRequired,
     history: PropTypes.object.isRequired
 };
+
+export default PrivateHeader;
